@@ -12,6 +12,8 @@ Equipo #3
 
 Nuestro proyecto consiste en un sistema de administración de una tienda de conveniencia, por lo tanto consideramos la delegación de tareas que realiza un gerente a sus subordinados en un calendario, asi como el manejo de inventario. Particularmente, nos apoyamos en la experiencia de nuestro compañero David para encontrar y resolver los problemas que sufren los puntos de venta de OXXO (como que es imposible eliminar articulos que ya no se desea pagar sin apagar la terminal) mediante una mejor integración del sistema.
 
+No solo porque sea esa tienda en especifico significa que solo ese problema lo tenga ellos si no sen general donde pudimos ver que podría ayudar a las demás compañía así sea una una tiendas de conveniencia grande hasta una tienda chica donde pudieran usar ese programa donde pudimos  observar los diferentes tipos de problemas que pudieran tener hasta una organización de almacén(stock) hasta donde están los productos en ventas donde el publico pudiera agarrar el producto deseado.
+
 ## Propuesta técnica
 
 Para manejar cada usuario que acceda a su cuenta en el servidor y tener la capacidad de reconocer si es que es un empleado o un gerente, tenemos la clase **Session** cuyos atributos _nombre_ y _string_ nos permite buscarlo (luego de ser creada) en una base de datos simulada con un archivo JSON que reside en el servidor, además esta clase cuenta con los metodos getEmpleado() y getGerente() que nos permiten obtener un objeto con las propiedades del empleado, y en el caso de emplear el segundo metodo y que las credenciales no pertenezcan a un gerente, retornar nulo.
