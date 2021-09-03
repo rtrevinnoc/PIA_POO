@@ -1,8 +1,14 @@
 # PIA de Programación Orientada a Objetos
 
+Equipo #3
+
+Ricardo Herrera Romero          #
+David Rene Hernandez Hernandez  #
+Roberto Treviño Cervantes       #1915003
+
 ## Introducción
 
-Aqui va la introducción (David).
+Nuestro proyecto consiste en un sistema de administración de una tienda de conveniencia, por lo tanto consideramos la delegación de tareas que realiza un gerente a sus subordinados en un calendario, asi como el manejo de inventario. Particularmente, nos apoyamos en la experiencia de nuestro compañero David para encontrar y resolver los problemas que sufren los puntos de venta de OXXO (como que es imposible eliminar articulos que ya no se desea pagar sin apagar la terminal) mediante una mejor integración del sistema.
 
 ## Propuesta técnica
 
