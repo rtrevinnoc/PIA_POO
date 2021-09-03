@@ -2,9 +2,11 @@
 
 Equipo #3
 
-Ricardo Herrera Romero          #
-David Rene Hernandez Hernandez  #
-Roberto Treviño Cervantes       #1915003
+|Nombre|Matricula|
+|---|---|
+|Ricardo Herrera Romero|#1953026|
+|David Rene Hernandez Hernandez|#1753416|
+|Roberto Treviño Cervantes|#1915003|
 
 ## Introducción
 
