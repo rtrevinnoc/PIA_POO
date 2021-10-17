@@ -8,6 +8,7 @@ public class Tarea {
 	public String empleado;
 	private boolean compleatado = false;
 	
+	// Constructor
 	Tarea(String empleado, String nombre, LocalDateTime[] horario, String descripcion) {
 		this.empleado = empleado;
 		this.nombre = nombre;
@@ -15,6 +16,7 @@ public class Tarea {
 		this.descripcion = descripcion;
 	}
 
+	// Getters/Setters
 	public String getNombre() {
 		return nombre;
 	}

@@ -8,6 +8,7 @@ public class Empleado {
 	public int edad;
 	public boolean gerente;
 	
+	// Constructor
 	Empleado(String nombre, String password, int edad, int[] horario, float salario, String sucursal, boolean gerente, String jefe) {
 		this.nombre = nombre;
 		this.password = password;
@@ -19,6 +20,7 @@ public class Empleado {
 		this.jefe = jefe;
 	}
 	
+	// Getters/Setters
 	public String getJefe() {
 		return jefe;
 	}
@@ -74,6 +76,7 @@ public class Empleado {
 		this.gerente = gerente;
 	}
 
+	// metodo para verificar la contraseña
 	public boolean checkPassword(String password) {
 		return this.password.equals(password);
 	}

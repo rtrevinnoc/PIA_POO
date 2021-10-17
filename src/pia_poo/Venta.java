@@ -5,6 +5,7 @@ public class Venta {
 	public float valorUnitario, valorTotal;
 	public int cantidad;
 	
+	// Constructor
 	Venta(String nombreEmpleado, String nombreArticulo, float valorUnitario, int cantidad) {
 		this.nombreArticulo = nombreArticulo;
 		this.nombreEmpleado = nombreEmpleado;
@@ -13,6 +14,7 @@ public class Venta {
 		this.valorTotal = valorUnitario * cantidad;
 	}
 
+	// Getters/Setters
 	public String getNombreArticulo() {
 		return nombreArticulo;
 	}

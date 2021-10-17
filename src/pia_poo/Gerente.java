@@ -9,9 +9,9 @@ public class Gerente extends Empleado {
 	public List<Empleado> subordinados;
     public static DateTimeFormatter formatoDiaHora = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm", Locale.forLanguageTag("es-ES"));
 
+    // Hereda del empleado
 	Gerente(String nombre, String password, int edad, int[] horario, float salario, String sucursal, List<Empleado> subordinados) {
 		super(nombre, password, edad, horario, salario, sucursal, true, null);
-		// TODO Auto-generated constructor stub
 		this.subordinados = subordinados;
 	}
 	
@@ -27,7 +27,9 @@ public class Gerente extends Empleado {
 		LocalDateTime tareaInicio, tareaFin, dateInicio, dateFin;
 		String inicioHora, finHora, inicioMinutos, finMinutos;
 		
+		// Se itera por sus subordinados
 		for (Empleado empleado : subordinados) {
+			// Si tiene el nombre de aquel al que se quiere asignar la tarea
 			if (empleado.getNombre().equalsIgnoreCase(tarea.getEmpleado())) {
 				horarioInicio = empleado.getHorario()[0];
 				horarioFin = empleado.getHorario()[1];
@@ -35,36 +37,44 @@ public class Gerente extends Empleado {
 				tareaInicio = tarea.getHorario()[0];
 				tareaFin = tarea.getHorario()[1];
 				
-				if ((horarioInicio / 100) < 10) {
-					inicioHora = "0" + (horarioInicio / 100);
+				// Se lee su horario, que esta como un int v.g 1600
+				
+				// Se cortan los dos digitos mayores
+				if ((horarioInicio / 100) < 10) { // Si tiene un solo digito
+					inicioHora = "0" + (horarioInicio / 100); // Se agrega un cero
 				} else {
-					inicioHora = String.valueOf(horarioInicio / 100);
+					inicioHora = String.valueOf(horarioInicio / 100); // Si no, se pasa igual
 				}
 				
+				// Se repite el proceso anterior pero con la hora en que termina el horario del empleado
 				if ((horarioFin / 100) < 10) {
 					finHora = "0" + (horarioFin / 100);
 				} else {
 					finHora = String.valueOf(horarioFin / 100);
 				}
 				
-				if (horarioInicio % 100 == 0) {
-					inicioMinutos = "00";
+				// Se cortan los ultimos dos digitos
+				if (horarioInicio % 100 < 10) { // Si tiene un solo digito
+					inicioMinutos = "0" + (horarioInicio % 100); // Se agrega un cero delante
 				} else {
 					inicioMinutos = String.valueOf(horarioInicio % 100);
 				}
 				
-				if (horarioFin % 100 == 0) {
-					finMinutos = "00";
+				// Se repite lo anterior, con el horario de salida
+				if (horarioFin % 100 < 10) {
+					finMinutos = "0" + (horarioFin % 100);
 				} else {
 					finMinutos = String.valueOf(horarioFin % 100);
 				}
 				
+				// Se construye la fecha a partir de la fecha de la tarea, y se le agrega el horario del empleado, y se lee para convertirse a LocalDateTime
 				dateInicio = LocalDateTime.parse(tareaInicio.getDayOfMonth() + "/" + tareaInicio.getMonthValue() + "/" + tareaInicio.getYear() + " " + inicioHora + ":" + inicioMinutos, formatoDiaHora);
 				dateFin = LocalDateTime.parse(tareaFin.getDayOfMonth() + "/" + tareaFin.getMonthValue() + "/" + tareaFin.getYear() + " " + finHora + ":" + finMinutos, formatoDiaHora);
 				
+				// Se compara que el horario de la tarea este dentro del horario de trabajo del empleado
 				if (tareaInicio.isAfter(dateInicio) && tareaFin.isBefore(dateFin)) {
-					calendario.addTarea(tarea);	
-				} else {
+					calendario.addTarea(tarea);	// Si esta, se agrega
+				} else { // Si no esta, se notifica
 					System.out.println("*** Debe ser dentro del horario del empleado de " + inicioHora + ":" + inicioMinutos + " a " + finHora + ":" + finMinutos + " ***");
 				}
 			}
@@ -72,33 +82,33 @@ public class Gerente extends Empleado {
 	}
 
 	public void eliminarTarea(Calendario calendario, String nombreEmpleado, String nombreTarea) {
-		for (Empleado empleado : subordinados) {
+		for (Empleado empleado : subordinados) { // Se itera sobre los subordinados
 			if (empleado.getNombre().equalsIgnoreCase(nombreEmpleado)) {
-				calendario.delTarea(nombreEmpleado, nombreTarea);
+				calendario.delTarea(nombreEmpleado, nombreTarea); // Se verifica que el empleado exista, y sea subordinado del gerente
 			}
 		}
 	}
 	
 	public void setSalario(String nombreEmpleado, float salario) {
-		for (Empleado empleado : subordinados) {
-			if (empleado.getNombre().equalsIgnoreCase(nombreEmpleado)) {
-				empleado.setSalario(salario);
+		for (Empleado empleado : subordinados) { // Se itera sobre los subordinados
+			if (empleado.getNombre().equalsIgnoreCase(nombreEmpleado)) { // Se verifica que el empleado exista y sea subordinado del gerente
+				empleado.setSalario(salario); // Se cambia el salario
 			}
 		}
 	}
 	
 	public void setHorario(String nombreEmpleado, int[] horario) {
-		for (Empleado empleado : subordinados) {
-			if (empleado.getNombre().equalsIgnoreCase(nombreEmpleado)) {
-				empleado.setHorario(horario);
+		for (Empleado empleado : subordinados) {// Se itera sobre los subordinados
+			if (empleado.getNombre().equalsIgnoreCase(nombreEmpleado)) {// Se verifica que el empleado exista y sea subordinado del gerente
+				empleado.setHorario(horario); // Se cambia el horario
 			}
 		}
 	}
 	
 	public void setSucursal(String nombreEmpleado, String sucursal) {
-		for (Empleado empleado : subordinados) {
-			if (empleado.getNombre().equalsIgnoreCase(nombreEmpleado)) {
-				empleado.setSucursal(sucursal);
+		for (Empleado empleado : subordinados) {// Se itera sobre los subordinados
+			if (empleado.getNombre().equalsIgnoreCase(nombreEmpleado)) {// Se verifica que el empleado exista y sea subordinado del gerente
+				empleado.setSucursal(sucursal); // Se cambia la sucursal
 			}
 		}		
 	}
