@@ -16,69 +16,60 @@ No solo porque sea esa tienda en especifico significa que solo ese problema lo t
 
 ## Propuesta técnica
 
-Para manejar cada usuario que acceda a su cuenta en el servidor y tener la capacidad de reconocer si es que es un empleado o un gerente, tenemos la clase **Session** cuyos atributos _nombre_ y _string_ nos permite buscarlo (luego de ser creada) en una base de datos simulada con un archivo JSON que reside en el servidor, además esta clase cuenta con los metodos getEmpleado() y getGerente() que nos permiten obtener un objeto con las propiedades del empleado, y en el caso de emplear el segundo metodo y que las credenciales no pertenezcan a un gerente, retornar nulo.
+Para manejar cada usuario que accede a su cuenta, y tener la capacidad de reconocer si son un empleado, usamos un archivo TSV que guarda las especificaciones con las cuales reconstruir cada empleado usando la clase `Empleado` y añadirlo a un `ArrayList<Empleado>`. Si el archivo no existe, se crea y se guarda el nuevo empleado que esta ejecutando el programa, de lo contrario, se busca uno que concuerde con las credenciales ingresadas y se cambia el valor de la variable booleana `inicioSesion`. A partir de esto, se realiza un proceso similar con las tareas, y el historial de ventas en sus archivos TSV correspondientes. Todo esto se ha separado en metodos dedicados como `cargarTareas()` y `guardarEmpleados()`.
 
-El nucleo de la aplicación reside en la clase **Empleado** que contiene la información (en forma de atributos) de _salario_, _horario_ (como un par de enteros en un array), la _sucursal_, _nombre_, _edad_, _password_ (privado). La mayoria de los atributos anteriores permiten interacción mediante getters y setters regulares, excepto _password_ que solo permite la verificación con `checkPassword(): void`. De esta clase, hereda la clase **Gerente**, y añade el atributo _subordinados_ que es una lista de objetos de la clase **Empleado**, y puede modificarse mediante los setters y getters regulares, y tambien incluye un metodo `asignarTarea(empleado:String, tarea:Tarea): void` que permite asignar una tarea a un empleado.
+Al momento de iniciar sesion como se ha descrito anteriormente, si la linea con las credenciales identificadas para reconstruir el usuario indica el campo `gerente` como verdadero, entonces se asigna a la variable supervisor un objeto `Gerente` con las especificaciones del mismo empleado leido. Esto es importante ya que en algunas de las opciones del menu que se presenta despues, verifican que el usuario actual sea gerente, mediante el metodo `isGerente()` de la clase empleado, sobre la variable actual, que contiene el empleado que ha iniciado sesion.
 
-Los **Gerente**'s tienen la capacidad de modificar directamente el objeto de Inventario, pero los **Empleado**'s requieren la mediación de un objeto de la clase **CajaDeCobro** que les permite vender (eliminar) mercancias del inventario y aumentar el dinero en la caja de cobro.
+La clase `Gerente` tiene algunos metodos para cambiar atributos de los empleados que contenga en su `ArrayList<Empleados>`, los cuales se le han asignado al cargarse del archivo TSV `empleados.txt` si es que el campo `jefe` contenia su mismo nombre. Desde sus metodos `asignarTarea()` y `eliminarTarea()` (y otros) podemos manipular la informacion que concierne a los empleados, pero ellos no tienen capacidad de modificar.
 
-Además, los **Empleado** tiene acceso a un objeto global de la clase **Calendario** donde el **Gerente** programa sus tareas, y desde el cual podemos leer cada tarea de cada empleado para desplegarla en la interfaz grafica, esto a través de que cada tarea esta especificada mediante la clase **Tarea** que contiene un horario (en el mismo formato del que tiene el empleado) asi como un booleano que nos indica si esta completado.
+Finalmente, la clase `Calendario` reune los objetos de clase `Tarea` que ha creado el `Gerente` para sus `Empleado`'s, esta nos permite filtrar por dias o por empleados, asi com elimainar y crear tareas. Esta es la que interactua directamente con la creación de las tareas, por lo tanto, el gerente lo hace a través de esta.
 
 ### Entidades:
 
-#### “Session” Esta clase tiene como función principal el inicio de sesión en el sistema.
-  
-- 2 atributos String, nombre (public) y password (private).
-- Session(nombre: String, password: String) Verifica las listas de empleados y los gerentes, para corroborar si nombre y password coinciden con algún registro.
-- getEmpleado() Regresa las coincidencias de empleados.
-- getGerentes() Regresa las coincidencias de gerentes.
+#### “Empleado” Clase padre, tiene salario, horario, sucursal, nombre y contraseña.
 
-#### “Empleado” Clase padre, asigna salarios, horarios, sucursales, nombres y contraseñas, crea empleados y compara las contraseñas.
-
-- 6 atributos, float salario, horario Int[2], String sucursal, String nombre, int edad  (public) y una variable String password (private).
+- 8 atributos, float salario, horario Int[2], String sucursal, String nombre, int edad, boolean gerente y String jefe (public) y una variable String password (private).
 - getSalario(), setSalario(float) establecer u obtener valores de Salario.
 - getHorario(), setHorario(int[2]) establecer u obtener valor de Horario.
 - getSucursal(), setSucursal(String) establecer u obtener sucursal.
 - getNombre(), setNombre(String) establecer u obtener nombres.
 - getEdad(), setEdad(int) establecer u obtener edades.
-- Empleado(salario: float, horario: int[2], sucursal: String, nombre: String, edad: int, password: String) Método principal, crea los todos los objetos empleados con los parámetros ingresados.
+- setGerente(), isGerente() cambia u obtiene el estado de si es gerente.
+- getJefe(), setJefe() cambia u obtiene el nombre del gerente encargado.
+- Empleado(salario: float, horario: int[2], sucursal: String, nombre: String, edad: int, password: String, gerente: boolean, jefe: String) Método principal, crea los todos los objetos empleados con los parámetros ingresados.
 - setPassword(String), checkPassword(String) establecer y verificar la contraseña.
 
 #### “Gerente” Subclase de Empleado, maneja los subordinados, asigna tareas y crea gerentes.
-- Atributos: subordinados: List<Empleado> (public)
+- Atributos: subordinados: ArrayList<Empleado> (public)
 - setSubordinados(List), getSubordinados() establecer y obtener los Subordinados
 - asignarTarea(String, Tarea) Asigna tareas a los subordinados.
+- setHorario(), setSalario() y setSucursal() configura los atributos de sus subordinados.
 - Gerente(salario: float, horario: int[2], sucursal: String, nombre: String, edad: int, subordinados: List, password: String) Método principal, crea todos los objetos gerentes con los parámetros ingresados.
   
-#### “Calendario” Guarda, muestra, completa y borra tareas en un HashMap.
+#### “Calendario” Guarda, muestra, completa y borra tareas en un ArrayList.
 - Atributos tareas: HashMap (public).
-- mostrarTareasDe(nombre: String, día: Date) Regresa una lista con las tareas asignadas a cierto empleado.
-- addTarea(nombre: String, tarea: Tarea) Añade una tarea a tareas.
+- mostrarTodasTareasDe(nombre: String, formato: DateTimeFormatter) Regresa una lista con las tareas asignadas a cierto empleado.
+- mostrarTodasTareasDePorDiaDe(nombre: String, día: LocalDateTime, formato: DateTimeFormatter) Regresa una lista con las tareas asignadas a cierto empleado en un dia especifico.
+- mostrarTodasTareas(formato DateTimeFormatter) Regresa todas las tareas.
+- addTarea(tarea: Tarea) Añade una tarea a tareas.
 - delTarea(nombre: String, nombreTarea: String) Elimina una tarea de tareas.
 - wipeTareas() Elimina todas las tareas existentes.
 - completarTarea(nombre: String, nombreTarea: String, día: Date) Registra que una tarea fue completada y la fecha en que se acompletó.
 
 #### “Tarea”
 - Atributos String nombre, horario int[2], String descripcion, boolean completado.
-- Tarea(nombre: String, horario: int[2], descripcion: String) Crea tareas, con nombre, el horario y la descripción de lo que se pide.
+- Tarea(nombre: String, nombreTarea: String, horario: LocalDateTime[2], descripcion: String) Crea tareas, con nombre, el horario y la descripción de lo que se pide.
+- completar() Marca como completa una tarea.
+- getDescripcion(), setDescripcion() Configura la descripcion de la tarea
+- getEmpleado(), setEmpleado() Configura el encargado de la tarea
+- getHorario(), setHorario() Configura la programacion de la tarea
+- getNombre(), setNombre() Configura el identificador de la tarea
 
-#### “Caja de cobro”
-- Atributos inventario: Inventario (private).
-- vender(nombre: String, cantidad: String) Método para vender, ingresa el producto y la cantidad a vender.
-- CajaDeCobro(inventario: Inventario) Comprueba existencias en el inventario.
-
-#### “Inventario”
-- Variable mercancías: List<Mercancia>
-- Inventario()
-- addMercancia(Mercancia) Añade productos a la lista de mercancía.
-- updateMercancia(Mercancia) Actualiza los productos existentes en la lista.
-- getMercancia(nombre: String) Ubica un producto dentro de la lista por su nombre.
-- delMercancia(nombre: String) Ubica y elimina un producto de la lista por su nombre.
-
-#### “Mercancia”
-- Variables: String nombre, float precio, int existencia, int mínimo.
-- getNombre(), setNombre(String) Obtiene o establece el nombre de la mercancía.
-- getPrecio(), setPrecio(float) Obtiene o establece el precio de la mercancía.
-- getExistencia(), setEsistencia(int) Obtiene o establece las existencias de cierta mercancía.
-- getMinimo(), setMinimo(int) Obtiene o establece el mínimo de mercancía requerido en inventario.
-- Mercancia(nombre: String, precio: float, existencia: int, mínimo: int) Método principal, crea los todos los objetos mercancias con los parámetros ingresados.
+#### "Venta"
+- Atributos String nombreArticulo, String nombreEmpleado, float valorUnitario, float valorTotal, int cantidad
+- Venta(nombreArticulo, nombreEmpleado, valorUnitario, cantidad) Crea el objeto
+- getCantidad()
+- getNombreArticulo()
+- getNombreEmpleado()
+- getValorTotal()
+- getValorUnitario()
