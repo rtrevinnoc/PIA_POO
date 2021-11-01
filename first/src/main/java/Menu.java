@@ -110,6 +110,7 @@ public class Menu extends HttpServlet {
 	    Empleado actual = (Empleado) sesion.getAttribute("actual");
 	    ArrayList<Empleado> empleados = (ArrayList<Empleado>) sesion.getAttribute("empleados");
 	    Calendario calendario = (Calendario) sesion.getAttribute("calendario");
+	    ArrayList<Venta> historialVentas = (ArrayList<Venta>) sesion.getAttribute("historialVentas");
 
 		switch(Integer.parseInt(request.getParameter("opcion"))) {
 	    	case 1:
@@ -185,10 +186,63 @@ public class Menu extends HttpServlet {
 	    	    out.print("</table>");
 	    		break;
 	    	case 4:
+	    	    out.println("<h1>Registrar Venta</h1>");
+	    		
+	    	    out.print("<form action='RegistrarVenta' method='post'>");
+	    	    out.print("<table>");
+	    	    out.print("<tr><td>Nombre de Articulo:</td><td><input type='text' name='name'/></td></tr>");
+	    	    out.print("<tr><td>Precio (Unitario):</td><td><input type='number' name='precio' placeholder='precio'/></td></tr>");
+	    	    out.print("<tr><td>Cantidad:</td><td><input type='number' name='cantidad' placeholder='cantidad'/></td></tr>");
+	    	    out.print("<tr><td colspan='2'><input type='submit' value='Registrar Venta'/></td></tr>");  
+	    	    out.print("</table>");  
+	    	    out.print("</form>");   
+	    		
 	    		break;
 	    	case 5:
+	    	    out.println("<h1>Listar Ventas</h1>");
+
+	    	    out.print("<table>");
+	    	    out.print("<tr>");
+	    	    out.print("<th>Empleado:</th>");
+	    	    out.print("<th>Articulo:</th>");
+	    	    out.print("<th>Cantidad:</th>");
+	    	    out.print("<th>Precio Unitario:</th>");
+	    	    out.print("<th>Precio Total:</th>");
+	    	    out.print("</tr>");
+	    	    
+	    		for (Venta venta : historialVentas) { // Se itera por las tareas
+	    			out.print("<tr>");
+	    			out.print("<td>" + venta.getNombreEmpleado() + "</td>");
+	    			out.print("<td>" + venta.getNombreArticulo() + "</td>");
+	    			out.print("<td>" + venta.getCantidad() + "</td>");
+	    			out.print("<td>" + venta.getValorUnitario() + "</td>");
+	    			out.print("<td>" + venta.getValorTotal() + "</td>");
+	    		}
+	    	    
+	    	    out.print("</table>");
 	    		break;
 	    	case 6:
+	    	    out.println("<h1>Listar Mis Ventas</h1>");
+
+	    	    out.print("<table>");
+	    	    out.print("<tr>");
+	    	    out.print("<th>Articulo:</th>");
+	    	    out.print("<th>Cantidad:</th>");
+	    	    out.print("<th>Precio Unitario:</th>");
+	    	    out.print("<th>Precio Total:</th>");
+	    	    out.print("</tr>");
+	    	    
+	    		for (Venta venta : historialVentas) { // Se itera por las tareas
+	    			if (venta.getNombreEmpleado().equalsIgnoreCase(actual.getNombre())) {
+		    			out.print("<tr>");
+		    			out.print("<td>" + venta.getNombreArticulo() + "</td>");
+		    			out.print("<td>" + venta.getCantidad() + "</td>");
+		    			out.print("<td>" + venta.getValorUnitario() + "</td>");
+		    			out.print("<td>" + venta.getValorTotal() + "</td>");
+	    			}
+	    		}
+	    	    
+	    	    out.print("</table>");
 	    		break;
 	    	case 7:
 	    	    out.println("<h1>Registrar Empleado</h1>");

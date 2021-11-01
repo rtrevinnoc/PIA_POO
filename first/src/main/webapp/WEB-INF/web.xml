@@ -54,4 +54,14 @@
     <servlet-name>RegistrarEmpleado</servlet-name>
     <url-pattern>/RegistrarEmpleado</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RegistrarVenta</display-name>
+    <servlet-name>RegistrarVenta</servlet-name>
+    <servlet-class>RegistrarVenta</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegistrarVenta</servlet-name>
+    <url-pattern>/RegistrarVenta</url-pattern>
+  </servlet-mapping>
 </web-app>

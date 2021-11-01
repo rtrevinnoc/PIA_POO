@@ -13,6 +13,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import first.Calendario;
+import first.Gerente;
 import first.Tarea;
 
 /**
@@ -44,6 +47,9 @@ public class RegistrarTarea extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		PrintWriter out = response.getWriter();
+	    HttpSession sesion = request.getSession();
+		Gerente supervisor = (Gerente) sesion.getAttribute("supervisor");
+	    Calendario calendario = (Calendario) sesion.getAttribute("calendario");
 		
         // Se convierten las cadenas a LocalDateTime siguiendo el formateador del inicio
         LocalDateTime dateInicio = LocalDateTime.parse(request.getParameter("inicio"), formatoDiaHora);
@@ -52,7 +58,7 @@ public class RegistrarTarea extends HttpServlet {
         // Se crea el objeto de tarea
         Tarea tarea = new Tarea(request.getParameter("name"), request.getParameter("nameTarea"), new LocalDateTime[] {dateInicio, dateFin}, request.getParameter("descripcion"));
         // Se añade la tarea al calendario
-        //supervisor.asignarTarea(calendario, tarea);
+        supervisor.asignarTarea(calendario, tarea);
         // Se guarda la tarea en el archivo
 		guardarTarea(tarea);
 		
