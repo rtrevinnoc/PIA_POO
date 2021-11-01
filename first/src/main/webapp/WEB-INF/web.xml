@@ -64,4 +64,54 @@
     <servlet-name>RegistrarVenta</servlet-name>
     <url-pattern>/RegistrarVenta</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EliminarTarea</display-name>
+    <servlet-name>EliminarTarea</servlet-name>
+    <servlet-class>EliminarTarea</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EliminarTarea</servlet-name>
+    <url-pattern>/EliminarTarea</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>VerCalendario</display-name>
+    <servlet-name>VerCalendario</servlet-name>
+    <servlet-class>VerCalendario</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VerCalendario</servlet-name>
+    <url-pattern>/VerCalendario</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>VerCalendarioCompleto</display-name>
+    <servlet-name>VerCalendarioCompleto</servlet-name>
+    <servlet-class>VerCalendarioCompleto</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VerCalendarioCompleto</servlet-name>
+    <url-pattern>/VerCalendarioCompleto</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>VerVentas</display-name>
+    <servlet-name>VerVentas</servlet-name>
+    <servlet-class>VerVentas</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VerVentas</servlet-name>
+    <url-pattern>/VerVentas</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ActualizarEmpleado</display-name>
+    <servlet-name>ActualizarEmpleado</servlet-name>
+    <servlet-class>ActualizarEmpleado</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ActualizarEmpleado</servlet-name>
+    <url-pattern>/ActualizarEmpleado</url-pattern>
+  </servlet-mapping>
 </web-app>

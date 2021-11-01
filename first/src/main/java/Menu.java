@@ -118,7 +118,6 @@ public class Menu extends HttpServlet {
 
 	    	    out.print("<table>");
 	    	    out.print("<tr>");
-	    	    out.print("<th>Nombre:</th>");
 	    	    out.print("<th>Descripcion:</th>");
 	    	    out.print("<th>Fecha Inico:</th>");
 	    	    out.print("<th>Fecha Fin:</th>");
@@ -127,7 +126,6 @@ public class Menu extends HttpServlet {
 	    		for (Tarea tarea : calendario.getTareas()) { // Se itera por las tareas
 	    			if (tarea.getEmpleado().equalsIgnoreCase(actual.getNombre())) {
 		    			out.print("<tr>");
-		    			out.print("<td>" + tarea.getNombre() + "</td>");
 		    			out.print("<td>" + tarea.getDescripcion() + "</td>");
 		    			out.print("<td>" + tarea.getHorario()[0].format(formatoDiaHora) + "</td>");
 		    			out.print("<td>" + tarea.getHorario()[1].format(formatoDiaHora) + "</td>");
@@ -278,14 +276,63 @@ public class Menu extends HttpServlet {
 	    	    out.print("</form>");    
 	    		break;
 	    	case 9:
-	    		break;
+	    	    out.println("<h1>Eliminar Tarea a Empleado</h1>");
+	    	    
+	    	    out.print("<form action='EliminarTarea' method='post'>");
+	    	    out.print("<table>");
+	    	    out.print("<tr><td>Nombre de Empleado:</td><td><input type='text' name='name'/></td></tr>");
+	    	    out.print("<tr><td>Nombre de Tarea:</td><td><input type='text' name='nameTarea'/></td></tr>");
+	    	    out.print("<tr><td colspan='2'><input type='submit' value='Eliminar Tarea'/></td></tr>"); 
+	    	    out.print("</table>");  
+	    	    out.print("</form>");    
+	    	    break;
 	    	case 10:
-	    		break;
+	    	    out.println("<h1>Ver Calendario Por Dia de Empleado</h1>");
+	    	    
+	    	    out.print("<form action='VerCalendario' method='post'>");
+	    	    out.print("<table>");
+	    	    out.print("<tr><td>Nombre de Empleado:</td><td><input type='text' name='name'/></td></tr>");
+	    	    out.print("<tr><td>Fecha (v.g. 16/10/2021):</td><td><input type='text' name='fecha'/></td></tr>");
+	    	    out.print("<tr><td colspan='2'><input type='submit' value='Ver Calendario'/></td></tr>"); 
+	    	    out.print("</table>");  
+	    	    out.print("</form>");
+                break;
 	    	case 11:
+	    	    out.println("<h1>Ver Calendario Completo de Empleado</h1>");
+	    	    
+	    	    out.print("<form action='VerCalendarioCompleto' method='post'>");
+	    	    out.print("<table>");
+	    	    out.print("<tr><td>Nombre de Empleado:</td><td><input type='text' name='name'/></td></tr>");
+	    	    out.print("<tr><td colspan='2'><input type='submit' value='Ver Calendario'/></td></tr>"); 
+	    	    out.print("</table>");  
+	    	    out.print("</form>");
 	    		break;
 	    	case 12:
+	    	    out.println("<h1>Actualizar Informacion de Empleado</h1>");
+	    	    
+	    	    out.print("<form action='ActualizarEmpleado' method='post'>");
+	    	    out.print("<table>");
+	    	    out.print("<tr><td>Nombre de Empleado:</td><td><input type='text' name='name'/></td></tr>");
+	    	    out.print("<tr><td><select name='campo'>");  
+	    	    out.print("<option value='1'>Horario Inicio</option>");
+	    	    out.print("<option value='2'>Horario Final</option>");
+	    	    out.print("<option value='3'>Salario</option>");
+	    	    out.print("<option value='4'>Sucursal</option>");
+	    	    out.print("</select><td><tr>");
+	    	    out.print("<tr><td>Nuevo Valor:</td><td><input type='text' name='nuevo'/></td></tr>");
+	    	    out.print("<tr><td colspan='2'><input type='submit' value='Actualizar Informacion'/></td></tr>"); 
+	    	    out.print("</table>");  
+	    	    out.print("</form>");
 	    		break;
 	    	case 13:
+	    	    out.println("<h1>Ver Ventas de Empleado</h1>");
+	    	    
+	    	    out.print("<form action='VerVentas' method='post'>");
+	    	    out.print("<table>");
+	    	    out.print("<tr><td>Nombre de Empleado:</td><td><input type='text' name='name'/></td></tr>");
+	    	    out.print("<tr><td colspan='2'><input type='submit' value='Ver Ventas'/></td></tr>"); 
+	    	    out.print("</table>");  
+	    	    out.print("</form>");
 	    		break;
 		}
 	}
