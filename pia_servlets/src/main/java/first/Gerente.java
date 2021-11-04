@@ -36,6 +36,7 @@ public class Gerente extends Empleado {
 				
 				tareaInicio = tarea.getHorario()[0];
 				tareaFin = tarea.getHorario()[1];
+				String diaTareaInicio, diaTareaFin;
 				
 				// Se lee su horario, que esta como un int v.g 1600
 				
@@ -67,9 +68,22 @@ public class Gerente extends Empleado {
 					finMinutos = String.valueOf(horarioFin % 100);
 				}
 				
+				// Igual agregar padding ante la fecha
+				if (tareaInicio.getDayOfMonth() < 10) {
+					diaTareaInicio = "0" + tareaInicio.getDayOfMonth();
+				} else {
+					diaTareaInicio = String.valueOf(tareaInicio.getDayOfMonth());
+				}
+				
+				if (tareaFin.getDayOfMonth() < 10) {
+					diaTareaFin = "0" + tareaFin.getDayOfMonth();
+				} else {
+					diaTareaFin = String.valueOf(tareaFin.getDayOfMonth());
+				}
+				
 				// Se construye la fecha a partir de la fecha de la tarea, y se le agrega el horario del empleado, y se lee para convertirse a LocalDateTime
-				dateInicio = LocalDateTime.parse(tareaInicio.getDayOfMonth() + "/" + tareaInicio.getMonthValue() + "/" + tareaInicio.getYear() + " " + inicioHora + ":" + inicioMinutos, formatoDiaHora);
-				dateFin = LocalDateTime.parse(tareaFin.getDayOfMonth() + "/" + tareaFin.getMonthValue() + "/" + tareaFin.getYear() + " " + finHora + ":" + finMinutos, formatoDiaHora);
+				dateInicio = LocalDateTime.parse(diaTareaInicio + "/" + tareaInicio.getMonthValue() + "/" + tareaInicio.getYear() + " " + inicioHora + ":" + inicioMinutos, formatoDiaHora);
+				dateFin = LocalDateTime.parse(diaTareaFin + "/" + tareaFin.getMonthValue() + "/" + tareaFin.getYear() + " " + finHora + ":" + finMinutos, formatoDiaHora);
 				
 				// Se compara que el horario de la tarea este dentro del horario de trabajo del empleado
 				if (tareaInicio.isAfter(dateInicio) && tareaFin.isBefore(dateFin)) {

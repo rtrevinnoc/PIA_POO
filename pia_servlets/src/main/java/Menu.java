@@ -48,9 +48,11 @@ public class Menu extends HttpServlet {
 		ArrayList<Venta> historialVentas = new ArrayList<Venta>();
 		Calendario calendario = new Calendario();
 	    
-	    out.println("<p>¡Hola " + actual.getNombre() + "!</p>");
+	    out.println("<p>Hola " + actual.getNombre() + "!</p>");
 	    out.println("<h1>Menu</h1>");
-	    out.print("<form action='Menu' method='post'>"); 
+	    out.print("<form action='Menu' method='post'>");
+	    out.print("<table>");
+	    out.print("<tr><td>");
 	    out.print("<select name='opcion'>");  
 	    out.print("<option value='1'>Ver Mi Calendario</option>");
 	    out.print("<option value='2'>Ver Calendario General</option>");
@@ -90,7 +92,9 @@ public class Menu extends HttpServlet {
 	    }
 	    
 	    out.print("</select>");
-	    out.print("<input type='submit' value='Seleccionar'/>");
+	    out.print("</td><td>");
+	    out.print("<input type='submit' value='Seleccionar'/></td></tr>");
+	    out.print("</table>");
 	    out.print("</form>");
 	    
         // Se cargan las tareas y las ventas desde sus archivos

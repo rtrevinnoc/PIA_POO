@@ -65,6 +65,7 @@ public class IniciarSesion extends HttpServlet {
 	    HttpSession sesion = request.getSession();
 	    
 	    cargarEmpleados(nombre, password, empleados);
+	    sesion.setAttribute("empleados", empleados);
 	    
         // Si no se ha podido iniciar sesion
         if (!inicioSesion) {
@@ -95,7 +96,6 @@ public class IniciarSesion extends HttpServlet {
     	    out.print("</form>");
     	    
     	    sesion.setAttribute("actual", actual);
-    	    sesion.setAttribute("empleados", empleados);
     	    
     	    response.sendRedirect(request.getContextPath() + "/Menu");
         }
