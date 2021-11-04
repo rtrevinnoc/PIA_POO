@@ -1,3 +1,0 @@
-Juanito	Secar	16/10/2021 16:00,16/10/2021 17:00	Secar ropa bien
-Chan	Limpiar	18/10/2021 15:00,18/10/2021 18:00	Limpiar Bien
-Chan	Limpiar	18/10/2021 15:00,18/10/2021 15:30	Limpiar Bien

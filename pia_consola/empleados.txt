@@ -1,4 +1,0 @@
-Pedro	150	40	800,1700	2000.0	Las Puentes	false	Roberto
-Juanito	160	25	900,1800	4000.0	Las Puentes	false	Roberto
-Chan	125	28	800,1600	1700.0	Santo Domingo	false	Roberto
-Roberto	1234	20	800,1900	1500.0	Las Puentes	true	null

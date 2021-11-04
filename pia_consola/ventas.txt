@@ -1,2 +1,0 @@
-Roberto	Papel	10.0	2
-Roberto	Computadora	10000.0	1
