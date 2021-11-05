@@ -22,7 +22,7 @@ public class Gerente extends Empleado {
 		this.subordinados.add(subordinado);
 	}
 	
-	public void asignarTarea(Calendario calendario, Tarea tarea) {
+	public boolean asignarTarea(Calendario calendario, Tarea tarea) {
 		int horarioInicio, horarioFin;
 		LocalDateTime tareaInicio, tareaFin, dateInicio, dateFin;
 		String inicioHora, finHora, inicioMinutos, finMinutos;
@@ -88,11 +88,14 @@ public class Gerente extends Empleado {
 				// Se compara que el horario de la tarea este dentro del horario de trabajo del empleado
 				if (tareaInicio.isAfter(dateInicio) && tareaFin.isBefore(dateFin)) {
 					calendario.addTarea(tarea);	// Si esta, se agrega
+					return true;
 				} else { // Si no esta, se notifica
 					System.out.println("*** Debe ser dentro del horario del empleado de " + inicioHora + ":" + inicioMinutos + " a " + finHora + ":" + finMinutos + " ***");
+					return false;
 				}
 			}
 		}
+		return true;
 	}
 
 	public void eliminarTarea(Calendario calendario, String nombreEmpleado, String nombreTarea) {

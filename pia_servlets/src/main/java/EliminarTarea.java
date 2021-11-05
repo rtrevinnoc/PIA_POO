@@ -23,7 +23,7 @@ import first.Tarea;
 public class EliminarTarea extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static File registroTareas = new File("tareas.txt");
-	private static DateTimeFormatter formatoDiaHora = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm", Locale.forLanguageTag("es-ES"));
+	private static DateTimeFormatter formatoDiaHora = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm", Locale.forLanguageTag("es-ES"));
 
     /**
      * Default constructor. 

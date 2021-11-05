@@ -27,7 +27,7 @@ import first.Gerente;
 public class Menu extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static File registroTareas = new File("tareas.txt"), registroVentas = new File("ventas.txt");
-	private static DateTimeFormatter formatoDiaHora = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm", Locale.forLanguageTag("es-ES"));
+	private static DateTimeFormatter formatoDiaHora = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm", Locale.forLanguageTag("es-ES"));
 
     /**
      * Default constructor. 
@@ -272,8 +272,8 @@ public class Menu extends HttpServlet {
 	    	    out.print("<table>");
 	    	    out.print("<tr><td>Nombre de Empleado:</td><td><input type='text' name='name'/></td></tr>");
 	    	    out.print("<tr><td>Nombre de Tarea:</td><td><input type='text' name='nameTarea'/></td></tr>");
-	    	    out.print("<tr><td>Fecha de Inicio (v.g. 16/10/2021 15:00):</td><td><input type='text' name='inicio'/></td></tr>");  
-	    	    out.print("<tr><td>Fecha de Fin (v.g. 16/10/2021 15:00):</td><td><input type='text' name='fin'/></td></tr>");
+	    	    out.print("<tr><td>Fecha de Inicio (v.g. 16/10/2021 15:00):</td><td><input type='datetime-local' name='inicio'/></td></tr>");  
+	    	    out.print("<tr><td>Fecha de Fin (v.g. 16/10/2021 15:00):</td><td><input type='datetime-local' name='fin'/></td></tr>");
 	    	    out.print("<tr><td>Descripcion:</td><td><input type='text' name='descripcion'/></td></tr>");
 	    	    out.print("<tr><td colspan='2'><input type='submit' value='Programar Tarea'/></td></tr>"); 
 	    	    out.print("</table>");  
@@ -296,7 +296,7 @@ public class Menu extends HttpServlet {
 	    	    out.print("<form action='VerCalendario' method='post'>");
 	    	    out.print("<table>");
 	    	    out.print("<tr><td>Nombre de Empleado:</td><td><input type='text' name='name'/></td></tr>");
-	    	    out.print("<tr><td>Fecha (v.g. 16/10/2021):</td><td><input type='text' name='fecha'/></td></tr>");
+	    	    out.print("<tr><td>Fecha (v.g. 16/10/2021):</td><td><input type='datetime-local' name='fecha'/></td></tr>");
 	    	    out.print("<tr><td colspan='2'><input type='submit' value='Ver Calendario'/></td></tr>"); 
 	    	    out.print("</table>");  
 	    	    out.print("</form>");

@@ -25,7 +25,7 @@ import first.Tarea;
 public class RegistrarTarea extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static File registroTareas = new File("tareas.txt");
-	private static DateTimeFormatter formatoDiaHora = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm", Locale.forLanguageTag("es-ES"));
+	private static DateTimeFormatter formatoDiaHora = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm", Locale.forLanguageTag("es-ES"));
 
     /**
      * Default constructor. 
@@ -59,9 +59,7 @@ public class RegistrarTarea extends HttpServlet {
         // Se crea el objeto de tarea
         Tarea tarea = new Tarea(request.getParameter("name"), request.getParameter("nameTarea"), new LocalDateTime[] {dateInicio, dateFin}, request.getParameter("descripcion"));
         // Se añade la tarea al calendario
-        supervisor.asignarTarea(calendario, tarea);
-        // Se guarda la tarea en el archivo
-		guardarTarea(tarea);
+        if(supervisor.asignarTarea(calendario, tarea)) guardarTarea(tarea);
 		
         response.sendRedirect(request.getContextPath() + "/Menu");
 	}
