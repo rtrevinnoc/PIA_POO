@@ -357,7 +357,7 @@ public class Main {
 	        		}
 	        		
 	        		// Se lee la informacion del empleado en cuestion
-	        		System.out.println("*** Ver Calendario Completo de Empleado ***");
+	        		System.out.println("*** Actualizar Informacion de Empleado ***");
 	        		sc.nextLine(); // Se limpia STDIN
 	        		
 	                System.out.print("Introduzca el nombre del empleado -> ");
